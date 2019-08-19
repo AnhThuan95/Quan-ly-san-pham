@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Add new profuct</p>
+<input type="text" placeholder="New product" id="newProduct">
+<input type="button" id="addProduct" value="Add" onclick="addProduct()"><br/><br/>
+
+<p>Display All Product</p>
+<table border='1' width='800' cellspacing='0' cellpadding='3' id="result">
+
+</table>
+<script>
+    let arrProduct = ["Sony Xperia", "Samsung Galaxy", "Nokia 6", "Xiaomi Redmi Note 4", "Apple iPhone 6s"];
+
+    function displayProduct() {
+        let sout = "";
+        for (let i = 0; i < arrProduct.length; i++) {
+            sout = sout + "<tr>";
+            sout = sout + "<td><p>" + (i + 1) + "</p></td>";
+            sout = sout + "<td><p id='" + i + "'>" + arrProduct[i] + "</p></td>";
+            sout = sout + "<td><input type='button' value='Edit' onclick='editProduct(" + i + ")'>" + "</input></td>";
+            sout = sout + "<td><input type='button' value='Delete' onclick='deleteProduct(" + i + ")'>" + "</input></td>";
+            sout = sout + "</tr>";
+        }
+        document.getElementById("result").innerHTML = sout;
+    }
+
+    function addProduct() {
+        let product = document.getElementById("newProduct").value;
+        if (product == "") {
+            alert("Vui long nhap vao ten.");
+        } else {
+            arrProduct.push(product);
+            displayProduct();
+            alert("added");
+        }
+    }
+
+    function editProduct(i) {
+        let temp = prompt("Nhap ten ban muon sua: ");
+        // document.getElementById(i).value = temp;
+        // document.getElementById(i).innerHTML = temp;
+        arrProduct[i] = temp;
+        displayProduct();
+        alert(arrProduct);
+    }
+
+    function deleteProduct(i) {
+        let arr = [];
+        let x = 0;
+        while (x < arrProduct.length) {
+            if (x == i) {
+                x++;
+                continue;
+            } else {
+                arr.push(arrProduct[x]);
+                x++;
+            }
+        }
+        arrProduct = arr;
+        displayProduct();
+    }
+
+    displayProduct();
+</script>
+
+</body>
+</html>
